@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Entry {
+  id          String   @id @default(uuid())
+  imageUrl    String
+  word        String   // Main Japanese word (kanji)
+  reading     String?  // Hiragana/Katakana reading (optional)
+  romaji      String?  // Romanization
+  translation String?  // Translation (optional)
+  notes       String?  // Additional notes
+  definition  String?  // Contextual usage info (quantifiers, scenarios)
+  tags        String[] // Categories/tags
+  jlptLevel   Int?     // 1-5 (N5 to N1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // 9-grid relations: self-referential many-to-many
+  relatedFrom EntryRelation[] @relation("RelatedFrom")
+  relatedTo   EntryRelation[] @relation("RelatedTo")
+
+  @@index([word])
+  @@index([reading])
+  @@index([translation])
+}
+
+model EntryRelation {
+  id           String   @id @default(uuid())
+  fromEntryId  String
+  toEntryId    String
+  position     Int      // 0-8 grid position (4 is center/self)
+  createdAt    DateTime @default(now())
+
+  fromEntry Entry @relation("RelatedFrom", fields: [fromEntryId], references: [id], onDelete: Cascade)
+  toEntry   Entry @relation("RelatedTo", fields: [toEntryId], references: [id], onDelete: Cascade)
+
+  @@unique([fromEntryId, position])
+  @@index([fromEntryId])
+  @@index([toEntryId])
+}

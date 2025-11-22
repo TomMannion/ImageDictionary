@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600;700&family=Inter:wght@300;400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-serif: 'EB Garamond', serif;
+  --font-japanese: 'Shippori Mincho', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Muted Arty Color Palette - Light Mode */
+  --color-cream-50: #FEFDFB;
+  --color-cream-100: #F9F7F4;
+  --color-cream-200: #F3F0EB;
+
+  --color-charcoal-50: #F5F5F5;
+  --color-charcoal-100: #E5E5E5;
+  --color-charcoal-200: #CCCCCC;
+  --color-charcoal-300: #A3A3A3;
+  --color-charcoal-400: #737373;
+  --color-charcoal-500: #525252;
+  --color-charcoal-600: #3C3C3C;
+  --color-charcoal-700: #2C2C2C;
+  --color-charcoal-800: #1F1F1F;
+  --color-charcoal-850: #1A1A1A;
+  --color-charcoal-900: #141414;
+  --color-charcoal-950: #0A0A0A;
+
+  --color-sage-50: #F6F7F5;
+  --color-sage-100: #E8EBE6;
+  --color-sage-200: #D4DAD0;
+  --color-sage-300: #B5BFB0;
+  --color-sage-400: #8F9C87;
+  --color-sage-500: #6B7861;
+  --color-sage-600: #556149;
+  --color-sage-700: #454E3C;
+
+  --color-rose-50: #FBF7F7;
+  --color-rose-100: #F5EDED;
+  --color-rose-200: #EBD9D9;
+  --color-rose-300: #D9BABA;
+  --color-rose-400: #C49292;
+  --color-rose-500: #A87070;
+  --color-rose-600: #8D5656;
+
+  /* Additional colors for dark mode */
+  --color-cream-warm: #F9F7F4;
+  --color-cream-muted: #E8E6E3;
+  --color-cream-subtle: #D1CFC9;
+  --color-sage-light: #A8B89F;
+  --color-sage-dark: #8F9F87;
+  --color-rose-light: #D4A5A5;
+  --color-rose-dark: #C49292;
+}
+
+/* Base Styles */
+body {
+  @apply bg-cream-50 text-charcoal-700 font-sans font-light;
+  letter-spacing: 0.01em;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply border border-charcoal-700 text-charcoal-700
+         hover:bg-charcoal-700 hover:text-cream-50
+         font-sans font-normal tracking-wide
+         py-2 px-6 rounded-none
+         transition-all duration-300 ease-in-out;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.btn-secondary {
+  @apply border border-charcoal-300 text-charcoal-600
+         hover:border-charcoal-500 hover:text-charcoal-800
+         font-sans font-light
+         py-2 px-4 rounded-none
+         transition-all duration-300 ease-in-out;
+  font-size: 0.875rem;
+}
+
+/* Input Fields */
+.input-field {
+  @apply w-full px-0 py-3
+         border-0 border-b border-charcoal-200
+         bg-transparent
+         focus:border-charcoal-600 focus:outline-none
+         font-sans font-light
+         placeholder-charcoal-300
+         transition-colors duration-200;
+}
+
+/* Cards */
+.card {
+  @apply bg-cream-50
+         transition-all duration-300 ease-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Tags */
+.tag {
+  @apply inline-block px-3 py-1
+         border border-charcoal-200 text-charcoal-600
+         font-sans font-light
+         rounded-full
+         transition-colors duration-200;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tag:hover {
+  @apply border-charcoal-400 text-charcoal-800;
+}
+
+/* Furigana / Ruby text styling */
+ruby {
+  ruby-position: over;
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: baseline;
+  line-height: 1;
+}
+
+ruby rt {
+  display: block;
+  font-size: 0.5em;
+  line-height: 1.4;
+  text-align: center;
+  user-select: none;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.1em;
+  white-space: nowrap;
+}
+
+/* Smooth font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] {
+  /* Override body styles for dark mode */
+  body {
+    @apply bg-charcoal-900 text-cream-warm;
+  }
+
+  /* Headers */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-cream-warm);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply border-cream-warm text-cream-warm
+           hover:bg-cream-warm hover:text-charcoal-900;
+  }
+
+  .btn-secondary {
+    @apply border-charcoal-600 text-cream-muted
+           hover:border-charcoal-500 hover:text-cream-warm;
+  }
+
+  /* Input Fields */
+  .input-field {
+    @apply border-charcoal-700
+           bg-charcoal-900
+           focus:border-cream-subtle
+           text-cream-warm
+           placeholder-charcoal-500;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-charcoal-800;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 1px rgba(249, 247, 244, 0.1);
+  }
+
+  /* Tags */
+  .tag {
+    @apply border-charcoal-600 text-cream-muted
+           bg-charcoal-800;
+  }
+
+  .tag:hover {
+    @apply border-charcoal-500 text-cream-warm;
+  }
+
+  /* Specific component overrides */
+  .bg-cream-50 {
+    @apply bg-charcoal-900;
+  }
+
+  .bg-cream-100 {
+    @apply bg-charcoal-850;
+  }
+
+  .text-charcoal-500 {
+    @apply text-cream-muted;
+  }
+
+  .text-charcoal-600 {
+    @apply text-cream-muted;
+  }
+
+  .text-charcoal-700 {
+    @apply text-cream-warm;
+  }
+
+  .text-charcoal-800 {
+    @apply text-cream-warm;
+  }
+
+  .border-charcoal-100 {
+    @apply border-charcoal-700;
+  }
+
+  .border-charcoal-200 {
+    @apply border-charcoal-600;
+  }
+
+  .border-charcoal-300 {
+    @apply border-charcoal-600;
+  }
+
+  /* Sage colors for dark mode */
+  .border-sage-300 {
+    @apply border-sage-dark;
+  }
+
+  .text-sage-700 {
+    @apply text-sage-light;
+  }
+
+  /* Rose colors for dark mode */
+  .text-rose-600 {
+    @apply text-rose-light;
+  }
+
+  /* Background overrides for images and specific elements */
+  .bg-charcoal-50 {
+    @apply bg-charcoal-800;
+  }
+
+  /* Hover states */
+  .hover\:bg-charcoal-700:hover {
+    @apply bg-cream-warm;
+  }
+
+  .hover\:text-cream-50:hover {
+    @apply text-charcoal-900;
+  }
+
+  .hover\:border-charcoal-400:hover {
+    @apply border-charcoal-500;
+  }
+
+  .hover\:border-charcoal-500:hover {
+    @apply border-charcoal-400;
+  }
+
+  .hover\:text-charcoal-600:hover {
+    @apply text-cream-muted;
+  }
+
+  .hover\:text-charcoal-800:hover {
+    @apply text-cream-warm;
+  }
+
+  /* Selected states for filters */
+  .bg-charcoal-50 {
+    @apply bg-charcoal-700;
+  }
+
+  /* White backgrounds (dropdowns, modals, etc.) */
+  .bg-white {
+    @apply bg-charcoal-800;
+  }
+
+  /* Gray backgrounds */
+  .bg-gray-50 {
+    @apply bg-charcoal-900;
+  }
+
+  .bg-gray-200 {
+    @apply bg-charcoal-700;
+  }
+
+  /* Gray text colors (forms, labels, helper text) */
+  .text-gray-500 {
+    @apply text-cream-subtle;
+  }
+
+  .text-gray-600 {
+    @apply text-cream-muted;
+  }
+
+  .text-gray-700 {
+    @apply text-cream-warm;
+  }
+
+  .text-gray-900 {
+    @apply text-cream-warm;
+  }
+
+  /* Hover states for light backgrounds */
+  .hover\:bg-charcoal-100:hover {
+    @apply bg-charcoal-700;
+  }
+
+  .hover\:bg-gray-300:hover {
+    @apply bg-charcoal-600;
+  }
+}

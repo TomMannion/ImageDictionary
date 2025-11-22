@@ -1,0 +1,17 @@
+{
+  "name": "image-dictionary",
+  "version": "1.0.0",
+  "description": "Japanese Image Dictionary - A visual learning tool for Japanese vocabulary",
+  "scripts": {
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
+    "build": "cd server && npm run build && cd ../client && npm run build",
+    "setup": "npm run install:all && cd server && npx prisma generate && npx prisma migrate deploy"
+  },
+  "keywords": ["japanese", "dictionary", "image", "learning", "vocabulary"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
